@@ -93,7 +93,7 @@ body{
 }
 
 /*tablet display*/
-@media (min-width:768px){
+@media  (min-width:768px){
     .sidebar{
         width:100px;
     }
@@ -104,8 +104,6 @@ body{
     .sidebar ul li span:nth-child(2){
         display:none;
     }
-   
-    
 
     .sidebar ul li i{
         font-size: 30px;
@@ -139,7 +137,7 @@ body{
    }
 
    /*large than 1200px*/
-   @media (main-width:1200px){
+   @media (min-width:1200px){
     .sidebar{
         width: 200px;
        }
@@ -157,11 +155,9 @@ body{
         text-decoration: none;
        }
        .main-content{
-        padding-top: 200px;
+        padding-top: 60px;
        }
-       .container-fluid{
-        padding-top: 10px;
-       }
+     
        .col-lg-3{
         padding-top: 10px;
        }
