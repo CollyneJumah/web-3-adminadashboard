@@ -16,16 +16,48 @@
         ?>
     </div>
 
+    <?php
+        $message=""; 
+        //1. dbconnection
+        require_once('dbconnection.php');
+        //2. check if form fields have values
+        if( isset($_POST['enrollmentButton']) ){
+            //fetch form values
+            $studentName = $_POST['name'];
+            $regNumber = $_POST['reg_number'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $course = $_POST['course'];
+
+            //insert into table, enrollments
+            $insertRecords = mysqli_query($conn, "INSERT INTO enrollments(name,reg_number,phone,email,course)
+                                VALUES('$studentName','$regNumber','$phone','$email','$course')");
+
+            if($insertRecords)
+            {
+                $message= "Data submitted successfuly";
+            }
+            else
+            {
+                $message= "Error occured. ";
+            }
+        }
+    ?>
+
 	<div class="main-content">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="card">
                         <div class="card-header bg-dark text-white text-center">
-                            <span><i class="fa fa-pencil"></i> Enroll Student</span>
+                            <span><i class="fa fa-pencil"></i> Enroll Student</span> <br>
+                            <?php 
+                                echo $message;
+                            ?>  
+                           
                         </div>
                         <div class="card-body">
-                            <form action="">
+                            <form action="addStudents.php" method="post" autocomplete="off">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -35,8 +67,8 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="registration_number">Please enter your Reg Number:</label>
-                                            <input type="text" name="registration_number" id=  "registration_number" class="form-control">
+                                            <label for="reg_number">Please enter your Reg Number:</label>
+                                            <input type="text" name="reg_number" id="reg_number" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +76,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="phone">Please enter your Phone number:</label>
-                                            <input type="tel" name="phone" id=  "phone" class="form-control">
+                                            <input type="tel" name="phone" id="phone" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -71,7 +103,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                    <button type="submit" class="btn btn-success">Enroll</button>
+                                    <button type="submit" name="enrollmentButton" class="btn btn-success">Enroll</button>
                                     </div>
                                 </div>
                             </form>
@@ -79,7 +111,6 @@
                     </div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	

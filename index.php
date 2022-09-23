@@ -2,6 +2,7 @@
 <html>
 	<?php 
 		include('includes/links.php')
+
 	?>
 <body>
 	<!-- header section   -->

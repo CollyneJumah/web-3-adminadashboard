@@ -12,8 +12,14 @@
 
 	<div class="sidebar">
 		<?php 
-			include('includes/sidebar.php')
+			include('includes/sidebar.php');
 		?>
+        <?php
+             //1. dbconnection
+            require_once('dbconnection.php');
+            //2. Fetch all records
+            $fetchStudentRecords = mysqli_query($conn, "SELECT * FROM enrollments");
+        ?>
 		</div>
 
 	<div class="main-content">
@@ -40,26 +46,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Collins Jumah</td>
-                                        <td>IN16/20269/15</td>
-                                        <td>+254790366848</td>
-                                        <td>collins@gmail.com</td>
-                                        <td>Web Design & Development</td>
-                                        <td>19th Sept 2022</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-success btn-sm">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php  while( $row= mysqli_fetch_array($fetchStudentRecords)){ ?>
+                                        <tr>
+                                            <td><?php echo $row['id'] ?></td>
+                                            <td><?php echo $row['name'] ?></td>
+                                            <td><?php echo $row['reg_number'] ?></td>
+                                            <td><?php echo $row['phone'] ?></td>
+                                            <td><?php echo $row['email'] ?></td>
+                                            <td><?php echo $row['course'] ?></td>
+                                            <td><?php echo $row['created_at'] ?></td>
+                                            <td>
+                                                <a href="editStudent.php" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-success btn-sm">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
